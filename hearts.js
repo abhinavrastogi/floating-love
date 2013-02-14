@@ -24,6 +24,7 @@
 var floatingLove = function(settings) {
 	var canvas, context;	
 	var res_heart, body;
+    var pool = new Array();
 	var arr_hearts = new Array();
 
 	window.requestAnimFrame = (function(callback) {
@@ -34,18 +35,25 @@ var floatingLove = function(settings) {
     })();
 
     var generateRandomHeart = function() {
-    	obj_heart = {
-        	'image': res_heart,
-        	'x': (window.innerWidth-100)*Math.random(),
-        	'y': window.innerHeight,
-        	'speed': settings.minSpeed + (settings.maxSpeed-settings.minSpeed)*Math.random(),
-        	'amplitude': settings.minAmplitude + (settings.maxAmplitude - settings.minAmplitude) * Math.random(),
-        	'frequency': settings.minFrequency + (settings.maxFrequency - settings.minFrequency) * Math.random(),
-        	'alpha': settings.minAlpha + (settings.maxAlpha - settings.minAlpha)*Math.random(),
-        	'size': (res_heart.height * settings.minScale) + (res_heart.height*(settings.maxScale - settings.minScale)) * Math.random(),
-        	'width': res_heart.width,
-        	'height':res_heart.height
-        };
+        var obj_heart;
+        console.log(pool.length);
+        if(pool.length>0) {
+            obj_heart=pool.pop();
+        } else {
+            obj_heart={};
+            obj_heart.image=res_heart;
+        }
+
+        obj_heart.x = (window.innerWidth-100)*Math.random();
+        obj_heart.y = window.innerHeight;
+        obj_heart.speed = settings.minSpeed + (settings.maxSpeed-settings.minSpeed)*Math.random();
+        obj_heart.amplitude = settings.minAmplitude + (settings.maxAmplitude - settings.minAmplitude) * Math.random();
+        obj_heart.frequency = settings.minFrequency + (settings.maxFrequency - settings.minFrequency) * Math.random();
+        obj_heart.alpha = settings.minAlpha + (settings.maxAlpha - settings.minAlpha)*Math.random();
+        obj_heart.size = (res_heart.height * settings.minScale) + (res_heart.height*(settings.maxScale - settings.minScale)) * Math.random();
+        obj_heart.width = res_heart.width;
+        obj_heart.height = res_heart.height;
+
         arr_hearts.push(obj_heart);
         setTimeout(generateRandomHeart, settings.interval);
     };
@@ -65,7 +73,7 @@ var floatingLove = function(settings) {
     	}
     	for(var i=0; i<arr_hearts.length; i++) {
     		if(arr_hearts[i].y<-100) {
-    			arr_hearts.splice(i,1);
+    			pool.push(arr_hearts.splice(i,1)[0]);
     			break;
     		}
     	}	
