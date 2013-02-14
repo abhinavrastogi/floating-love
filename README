@@ -1,8 +1,12 @@
 Add some valentine's day love to your webpages! Use this light weight script to make heart shaped balloons float up over your webpage. Fully customizable and doesn't hinder interaction with the page.
 
+Demo:
+
+    http://designcranium.com/projects/floating-love/
+
 Sample Usage:
 
-floatingLove({
+    floatingLove({
         'minSpeed': 1.5,        //Minimum vertical speed
         'maxSpeed': 2,          //Maximum vertical speed
         'minAmplitude': 0.5,    //Minimum amplitude (>0)
