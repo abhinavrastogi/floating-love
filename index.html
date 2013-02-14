@@ -1,0 +1,29 @@
+<html>
+
+<head>
+<script src="hearts.js"></script>
+<script>
+	var startHearts = function() {
+		floatingLove({
+			'minSpeed': 1.5,
+			'maxSpeed': 2,
+			'minAmplitude': 0.5,
+			'maxAmplitude': 1.5,
+			'minFrequency': 0.08,
+			'maxFrequency': 0.1,
+			'minAlpha': 0.7,
+			'maxAlpha': 0.8,
+			'minScale': 0.2,
+			'maxScale': 0.8,
+			'interval': 1000,
+			'delay': 1000
+		}).init();	
+	};
+</script>
+</head>
+
+<body onload="startHearts();">
+
+</body>
+
+</html>
